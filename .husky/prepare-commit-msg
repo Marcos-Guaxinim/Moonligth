@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# 1. Ignora merges e squashes
+case "$2" in
+  merge|squash) exit 0 ;;
+esac
+
+# 2. Extrai a chave (ID) da branch
+KEY=$(git symbolic-ref --short HEAD 2>/dev/null | grep -oE '[A-Z]+-[0-9]+' | head -n1)
+
+# 3. Anexa o ID ao final da mensagem de commit, se necessário
+[ -n "$KEY" ] && ! grep -q "$KEY" "$1" && printf '\nRefs: %s\n' "$KEY" >> "$1"
+
+exit 0

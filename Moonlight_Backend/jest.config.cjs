@@ -6,8 +6,11 @@ module.exports = {
   rootDir: "./",
   extensionsToTreatAsEsm: ['.ts'],
   moduleNameMapper: {
-    // Isso remove a extensão .js dos imports para o Jest encontrar o arquivo .ts
     '^(\\.{1,2}/.*)\\.js$': '$1',
+    '^@shared/(.*)\\.js$': '<rootDir>/src/shared/$1',
+    '^@shared/(.*)$': '<rootDir>/src/shared/$1',
+    '^@modules/(.*)\\.js$': '<rootDir>/src/modules/$1',
+    '^@modules/(.*)$': '<rootDir>/src/modules/$1',
   },
   transform: {
     // Configura o ts-jest para usar ESM durante a transformação
