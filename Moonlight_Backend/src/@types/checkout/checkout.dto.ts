@@ -1,4 +1,4 @@
-import type { CartItem } from "../common/cartItem.js"
+import type { CartItem } from "@shared/types/cartItem.js"
 
 export type CreateCheckoutDTO = {
     items: CartItem[],

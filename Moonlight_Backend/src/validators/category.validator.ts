@@ -1,5 +1,5 @@
 import type { CreateCategoryDTO, UpdateCategoryDTO } from "../@types/category/dto/category.input.dto.js";
-import { AppError } from "../utils/AppError.js";
+import { AppError } from "@shared/errors/AppError.js";
 
 
     export const assertRequiredFields = (fields: unknown[]): void => {

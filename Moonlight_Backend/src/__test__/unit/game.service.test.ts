@@ -3,7 +3,7 @@ import type { GameRepository } from "../../repositories/GameRepository.js";
 import type {
   FilterParams,
   QueryOptions,
-} from "../../@types/common/pagination.js";
+} from "@shared/types/pagination.js";
 import type { Game } from "../../@types/game/repository/game.repository.js";
 import type {
   CreateGameDTO,

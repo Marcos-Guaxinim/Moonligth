@@ -1,5 +1,5 @@
 import type { Request } from "express";
-import { toBoolean, toFloat, toInt, toString } from "../../utils/queryParser.js";
+import { toBoolean, toFloat, toInt, toString } from "@shared/query/queryParser.js";
 import type { GetGamesPaginatedDTO } from "../../@types/game/dto/game.input.dto.js";
 
 export const parseGameQuery = (query: Request['query']): GetGamesPaginatedDTO => ({

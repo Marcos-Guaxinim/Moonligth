@@ -1,5 +1,5 @@
 import type { Request } from "express";
-import { toInt, toString } from "../../utils/queryParser.js";
+import { toInt, toString } from "@shared/query/queryParser.js";
 import type { GetUsersPaginatedDTO } from "../../@types/user/dto/user.input.dto.js";
 
 export const parseUserQuery = (query: Request['query']): GetUsersPaginatedDTO => ({
@@ -8,5 +8,5 @@ export const parseUserQuery = (query: Request['query']): GetUsersPaginatedDTO =>
     name: toString(query.name),
     email: toString(query.email),
     cpf: toString(query.cpf),
-    type: toString(query.type)
+    role: toString(query.role)
 })

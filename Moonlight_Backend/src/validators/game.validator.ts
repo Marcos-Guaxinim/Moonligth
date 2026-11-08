@@ -1,5 +1,5 @@
 import type { CreateGameDTO, UpdateGameDTO } from "../@types/game/dto/game.input.dto.js";
-import { AppError } from "../utils/AppError.js";
+import { AppError } from "@shared/errors/AppError.js";
 import { isPriceValid } from "../utils/Validators/isPriceValid.js";
 
 

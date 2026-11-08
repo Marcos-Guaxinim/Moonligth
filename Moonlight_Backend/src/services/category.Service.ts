@@ -1,8 +1,8 @@
-import type { PaginatedResponse } from "../@types/common/pagination.js";
+import type { PaginatedResponse } from "@shared/types/pagination.js";
 import { CategoryRepository } from "../repositories/CategoryRepository.js";
 import type { CreateCategoryDTO, GetCategoriesPaginatedDTO, UpdateCategoryDTO } from "../@types/category/dto/category.input.dto.js";
 import type { CategoryResponseDTO } from "../@types/category/dto/category.output.dto.js";
-import { buildSqlFilters } from "../builders/sql/sqlFilterBuilder.js";
+import { buildSqlFilters } from "@shared/query/sqlFilterBuilder.js";
 import { categoryFilterConfig } from "../query/filters/categoryFilterConfig.js";
 import { validateCategory } from "../validators/category.validator.js";
 

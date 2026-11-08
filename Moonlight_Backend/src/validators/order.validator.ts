@@ -1,5 +1,5 @@
 import type { CreateOrderDTO, UpdateOrderDTO } from "../@types/order/dto/order.input.dto.js";
-import { AppError } from "../utils/AppError.js";
+import { AppError } from "@shared/errors/AppError.js";
 import { isPriceValid } from "../utils/Validators/isPriceValid.js";
 type validOrderStatus = "pending" | "approved" | "canceled";
 

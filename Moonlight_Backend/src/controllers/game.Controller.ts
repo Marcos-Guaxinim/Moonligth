@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import pool from "../config/database.js";
+import pool from "@shared/config/database.js";
 import type { GameService } from "../services/game.Service.js";
 import type { ResultSetHeader } from "mysql2";
 import type { GameQueryPayload } from "../@types/game/game.payload.js";
@@ -8,8 +8,8 @@ import type {
   GetGamesPaginatedDTO,
   UpdateGameDTO,
 } from "../@types/game/dto/game.input.dto.js";
-import { AppError } from "../utils/AppError.js";
-import { toBoolean, toFloat, toInt, toString } from "../utils/queryParser.js";
+import { AppError } from "@shared/errors/AppError.js";
+import { toBoolean, toFloat, toInt, toString } from "@shared/query/queryParser.js";
 import { parseGameQuery } from "../query/parsers/gameParser.js";
 
 export class GameController {

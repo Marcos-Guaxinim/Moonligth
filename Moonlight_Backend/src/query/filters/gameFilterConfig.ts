@@ -1,4 +1,4 @@
-import type { FilterConfig } from "../../builders/sql/filterConfigType.js";
+import type { FilterConfig } from "@shared/query/filterConfigType.js";
 
 type GameKeyFilters = "title" | "category" | "price_min" | "price_max" | "launch_date_from" | "launch_date_to" | "active";
 

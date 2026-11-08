@@ -2,14 +2,15 @@
  * DTO DE ENTRADA
  */
 
-import type { PaginatedQuery } from "../../common/pagination.js";
+import type { PaginatedQuery } from "@shared/types/pagination.js";
+import type { RoleName } from "../../role/role.types.js";
 
 export type CreateUserDTO = {
   name: string;
   email: string;
   password: string;
   cpf: string;
-  type: 'customer' | 'admin';
+  id_roles: number[];
 };
 
 export type UpdateUserDTO = {
@@ -18,7 +19,7 @@ export type UpdateUserDTO = {
   email: string;
   password: string;
   cpf: string;
-  type: 'customer' | 'admin';
+  id_roles: number[];
 };
 
 export type UpdateMeDTO = {
@@ -34,5 +35,5 @@ export interface GetUsersPaginatedDTO extends PaginatedQuery {
   name?: string | undefined
   email?: string | undefined;
   cpf?: string | undefined;
-  type?: string | undefined;
+  role?: string | undefined;
 };

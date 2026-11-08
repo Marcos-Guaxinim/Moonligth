@@ -1,5 +1,5 @@
 import type { ResultSetHeader, RowDataPacket } from "mysql2";
-import pool from "../config/database.js";
+import pool from "@shared/config/database.js";
 import type { ApprovedOrdersOfUser, Order, OrderWithoutUser } from "../@types/order/repository/order.repository.js";
 import type { CreateOrderDTO, UpdateOrderDTO } from "../@types/order/dto/order.input.dto.js";
 import type { LibraryOrderRows, MyOrderRows, OrderRow } from "../@types/order/repository/order.row.js";
@@ -28,7 +28,7 @@ export class OrderRepository{
     async findMyOrders(id_user: number): Promise<OrderWithoutUser[] | null>{
 
         const [rows] = await pool.query<MyOrderRows[]>(`
-        SELECT 
+        SELECT
             o.id_order, o.order_date, o.total, o.status,
             g.title, g.image,
             pi.price AS price
@@ -45,7 +45,7 @@ export class OrderRepository{
 
     async findAll(): Promise<Order[]>{
         const [rows] = await pool.query<OrderRow[]>(`
-          SELECT 
+          SELECT
             o.id_order, o.order_date, o.total, o.status,
             u.name, u.email,
             g.title, g.image,
@@ -61,7 +61,7 @@ export class OrderRepository{
 
     async findById(id_order: number): Promise<Order | null>{
         const [rows] = await pool.query<OrderRow[]>(`
-          SELECT 
+          SELECT
             o.id_order, o.order_date, o.total, o.status,
             u.name, u.email,
             g.title, g.image,
@@ -79,9 +79,9 @@ export class OrderRepository{
 
     async canPurchaseGame(id_user: number, id_game: number): Promise<boolean> {
         const [rows] = await pool.query<RowDataPacket[]>(
-            `SELECT 1 FROM purchased_items pi 
-            INNER JOIN \`order\` o ON o.id_order = pi.id_order 
-            WHERE o.id_user = ? AND pi.id_game = ? AND o.status = 'approved' 
+            `SELECT 1 FROM purchased_items pi
+            INNER JOIN \`order\` o ON o.id_order = pi.id_order
+            WHERE o.id_user = ? AND pi.id_game = ? AND o.status = 'approved'
             LIMIT 1`,
             [id_user, id_game]
         );

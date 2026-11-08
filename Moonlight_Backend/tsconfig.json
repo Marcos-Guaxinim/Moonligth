@@ -4,6 +4,10 @@
     // File Layout
     // "rootDir": "./src",
     // "outDir": "./dist",
+    "paths": {
+      "@shared/*": ["./src/shared/*"],
+      "@modules/*": ["./src/modules/*"]
+    },
     "rootDir": "./src",
     "outDir": "./dist",
     "module": "NodeNext",
@@ -45,5 +49,7 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
-  }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "tools", "__test__"]
 }
