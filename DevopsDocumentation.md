@@ -110,11 +110,66 @@ As variáveis `VITE_*` são embutidas no build: mudar uma delas exige `docker co
 
 ---
 
+## Aliases de import (backend)
+
+O backend usa apelidos de import em vez de caminhos relativos longos (`../../../`):
+
+| Alias | Aponta para | Conteúdo |
+| :-- | :-- | :-- |
+| `@shared/*` | `src/shared/*` | config de banco e upload, erros, middlewares de erro/upload, query builder, tipos comuns |
+| `@modules/*` | `src/modules/*` | módulos de domínio (em migração) |
+
+```ts
+import { AppError } from "@shared/errors/AppError.js";
+```
+
+**Regra do projeto (ESM com `NodeNext`):** o import termina sempre em `.js`, igual aos relativos. Para uma pasta, use `/index.js` (ex.: `@modules/order/index.js`). O Node não completa extensão nem `index` sozinho.
+
+### Quem resolve o import
+
+Um alias é só um apelido, e cada ferramenta resolve os imports **por conta própria**. Por isso ele é configurado em mais de um lugar:
+
+| Ferramenta | Quando age | Onde o alias é configurado | Sem isso |
+| :-- | :-- | :-- | :-- |
+| TypeScript (`tsc`, editor) | checar tipos e compilar | `paths` no `tsconfig.json` | erro `TS2307: Cannot find module` |
+| Jest | rodar os testes | `moduleNameMapper` no `jest.config.*` | testes falham com `Cannot find module` |
+| `tsx` | `npm run dev` | nada: lê os `paths` do tsconfig | n/a |
+| `tsc-alias` | depois do `tsc`, no build | script `build` do `package.json` | o `dist` mantém `@shared/...` e o Node cai com `ERR_MODULE_NOT_FOUND` |
+
+O `tsc` valida o alias, mas **não o reescreve** na saída. É o `tsc-alias` que troca `@shared/...` por caminho relativo dentro do `dist`.
+
+### Build
+
+```
+npm run build  →  tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json
+```
+
+- `tsconfig.build.json` herda do `tsconfig.json`, mas **exclui os testes** (`src/__test__`, `src/**/*.test.ts`). O editor e o `npx tsc --noEmit` continuam checando os testes, mas eles não entram no `dist` nem na imagem.
+- No Dockerfile, o estágio `builder` roda `npm run build` (o `npm ci` instala as devDependencies, incluindo o `tsc-alias`). O estágio final copia só o `dist` já reescrito e instala com `--omit=dev`, então produção roda `node dist/servers/server.js` sem depender de nada extra.
+- O `tsconfig.json` **não usa `baseUrl`**: ele está deprecado no TypeScript 6. Os `paths` são relativos ao próprio arquivo (`./src/shared/*`).
+- `tools/` (`migrate` e `seed`) fica fora do tsconfig e usa **caminhos relativos**, não alias.
+
+### Verificar
+
+```bash
+npm run build && grep -rn "@shared" dist --include="*.js"   # não deve imprimir nada
+node dist/servers/server.js                                  # deve subir sem ERR_MODULE_NOT_FOUND
+```
+
+### Criando um alias novo
+
+1. `tsconfig.json`: adicione a entrada em `paths`.
+2. `jest.config.*`: adicione **duas** regras no `moduleNameMapper`, a que termina em `\\.js$` **antes** da genérica (o Jest usa a primeira que casar).
+3. `tsx` e `tsc-alias` leem o tsconfig sozinhos: nada a fazer.
+
+___
+
 ## Qualidade
 
 **Local (Husky)**
 - `commit-msg`: exige o formato `tipo(escopo opcional): descrição`, com tipo em `feat`, `fix`, `chore`, `docs`, `refactor`, `test` ou `hotfix`.
 - `pre-push`: exige os containers rodando e executa `npm run test:e2e`. Se falhar, o push é bloqueado.
+- `prepare-commit-msg`: lê a chave do Jira no nome da branch (ex.: `feature/MOON-10-...`) e acrescenta `Refs: MOON-10` no rodapé do commit. Fluxo de branches: `feature/*` → PR para `develop` → `main`.
 
 **CI (GitHub Actions, `.github/workflows/playwright.yml`)**
 Roda em push e pull request para `main` e `develop`, e manualmente. O fluxo: monta o `.env` a partir dos secrets, gera os certificados com mkcert, sobe o Compose (com `RUN_SEED=true`), espera o HTTPS responder e roda o Playwright. O relatório fica salvo como artefato por 30 dias.
@@ -148,6 +203,9 @@ Os testes e2e (`tests/e2e/`) cobrem login, cadastro e o CRUD administrativo de j
 | Navegador desconfia do certificado | mkcert não instalado | `mkcert -install` e gerar os certificados de novo |
 | `moonlight.local` não abre | host não configurado | conferir o arquivo de hosts |
 | Mudei `VITE_*` e nada mudou | variáveis entram no build | subir com `--build` |
+| `Cannot find module '@shared/...'` nos testes | alias ausente ou fora de ordem no `moduleNameMapper` | a regra com `.js` vem antes da genérica |
+| Backend cai no boot com `ERR_MODULE_NOT_FOUND` e `@shared` | o `tsc-alias` não rodou no build | conferir o script `build` e `grep -rn "@shared" dist` |
+| `TS5101` sobre `baseUrl` | `baseUrl` no tsconfig (deprecado no TS 6) | remover e usar `paths` relativos ao tsconfig |
 
 ---
 
@@ -161,3 +219,7 @@ Os testes e2e (`tests/e2e/`) cobrem login, cadastro e o CRUD administrativo de j
 | Migrations por serviço `migrate`, não por init do MySQL | o init do MySQL só roda com volume vazio e nunca aplicaria migrations novas |
 | Seed opcional (`RUN_SEED`) | dado de exemplo e credencial de teste só existem em dev e na CI |
 | Banco publicado só via override | mantém o Compose principal próximo de produção |
+| Aliases `@shared` e `@modules` | evitam `../../../` e permitem mover módulos sem reescrever imports; base da modularização do backend |
+| `tsc-alias` no build, sem bundler | o `tsc` fica simples e produção roda `node dist` sem dependências extras |
+| `tsconfig.build.json` separado | testes continuam checados no editor, mas não vão para o `dist` nem para a imagem |
+| `tools/` com imports relativos | a pasta está fora do tsconfig e roda por `tsx` sem depender de `paths` |
