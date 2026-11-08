@@ -2,7 +2,7 @@
  * DTO DE ENTRADA
  */
 
-import type { PaginatedQuery } from "../../common/pagination.js";
+import type { PaginatedQuery } from "@shared/types/pagination.js";
 import type { RoleName } from "../../role/role.types.js";
 
 export type CreateUserDTO = {

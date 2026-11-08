@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import { AppError } from "../utils/AppError.js";
+import { AppError } from "@shared/errors/AppError.js";
 
 export const errorMiddleware = (err: unknown, req: Request, res: Response, next: NextFunction) => {
     if(err instanceof AppError){

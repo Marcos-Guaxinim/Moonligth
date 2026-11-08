@@ -2,7 +2,7 @@ import type { NextFunction, Request, Response } from 'express';
 import type { CheckoutService } from '../services/checkout.Service.js';
 import type { CreateCheckoutDTO, MercadoPagoWebhookDTO } from '../@types/checkout/checkout.dto.js';
 import type { OrderService } from '../services/order.Service.js';
-import { AppError } from '../utils/AppError.js';
+import { AppError } from '@shared/errors/AppError.js';
 
 export class CheckoutController{
 

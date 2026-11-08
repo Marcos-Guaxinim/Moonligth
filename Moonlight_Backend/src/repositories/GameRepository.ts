@@ -1,9 +1,9 @@
 import type { Pool, PoolConnection, ResultSetHeader } from "mysql2/promise";
 import type { Game } from "../@types/game/repository/game.repository.js";
 import type { GameCountRows, GameRow } from "../@types/game/repository/game.row.js";
-import pool from "../config/database.js";
+import pool from "@shared/config/database.js";
 import type { CreateGameDTO, UpdateGameDTO } from "../@types/game/dto/game.input.dto.js";
-import type { FilterParams, QueryOptions } from "../@types/common/pagination.js";
+import type { FilterParams, QueryOptions } from "@shared/types/pagination.js";
 
 export class GameRepository{
 
@@ -65,8 +65,8 @@ export class GameRepository{
     async update(query: UpdateGameDTO, connection?: PoolConnection): Promise<boolean>{
         const db = connection ?? this.pool;
         const [result] = await db.query<ResultSetHeader>(
-            `UPDATE game SET 
-            title = ?, description = ?, price = ?, image = ?, 
+            `UPDATE game SET
+            title = ?, description = ?, price = ?, image = ?,
             banner_image = ?, link = ?, launch_date = ?, active = ?
             WHERE id_game = ?`,
             [query.title, query.description, query.price, query.image, query.banner_image, query.link, query.launch_date, query.active, query.id_game]
@@ -83,7 +83,7 @@ export class GameRepository{
 
     async count({where, dbParams}: FilterParams): Promise<number>{
         const [rows] = await pool.query<GameCountRows[]>(
-            `SELECT COUNT(DISTINCT g.id_game) as total 
+            `SELECT COUNT(DISTINCT g.id_game) as total
             FROM game g
             LEFT JOIN game_category gc ON g.id_game = gc.id_game
             LEFT JOIN category c ON gc.id_category = c.id_category

@@ -1,5 +1,5 @@
 import type { Request } from "express";
-import { toInt, toString } from "../../utils/queryParser.js";
+import { toInt, toString } from "@shared/query/queryParser.js";
 import type { GetUsersPaginatedDTO } from "../../@types/user/dto/user.input.dto.js";
 
 export const parseUserQuery = (query: Request['query']): GetUsersPaginatedDTO => ({

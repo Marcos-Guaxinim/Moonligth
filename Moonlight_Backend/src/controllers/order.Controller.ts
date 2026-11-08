@@ -1,8 +1,8 @@
 import type { NextFunction, Request, Response } from 'express';
 import type { OrderService } from '../services/order.Service.js';
 import type { CreateOrderDTO, UpdateOrderDTO } from '../@types/order/dto/order.input.dto.js';
-import { AppError } from '../utils/AppError.js';
-import { toInt } from '../utils/queryParser.js';
+import { AppError } from '@shared/errors/AppError.js';
+import { toInt } from '@shared/query/queryParser.js';
 
 
 export class OrderController{

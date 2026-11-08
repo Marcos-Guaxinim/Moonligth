@@ -1,7 +1,7 @@
 import type { PoolConnection, RowDataPacket } from "mysql2/promise";
 import type { UserRoleRowsName } from "../@types/userRole/repository/userRole.row.js";
-import pool from "../config/database.js";
-import { AppError } from "../utils/AppError.js";
+import pool from "@shared/config/database.js";
+import { AppError } from "@shared/errors/AppError.js";
 
 export class UserRoleRepository {
 

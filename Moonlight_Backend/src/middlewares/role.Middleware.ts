@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from 'express';
-import { AppError } from "../utils/AppError.js";
+import { AppError } from "@shared/errors/AppError.js";
 import { userRepository } from '../config/container.js';
 import type { RoleName } from '../@types/role/role.types.js';
 

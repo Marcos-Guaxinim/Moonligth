@@ -3,7 +3,7 @@ import { OrderService } from "./order.Service.js";
 import { PurchasedItemsService } from "./purchasedItems.Service.js";
 import type { CreateCheckoutDTO } from "../@types/checkout/checkout.dto.js";
 import type { PurchasedItemsDTO } from "../@types/purchasedItem/purchasedItem.dto.js";
-import { AppError } from "../utils/AppError.js";
+import { AppError } from "@shared/errors/AppError.js";
 type PaymentStatus = 'approved' | 'pending' | 'canceled';
 
 export class CheckoutService{

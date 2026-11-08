@@ -1,12 +1,12 @@
-import type { PaginatedResponse } from '../@types/common/pagination.js';
+import type { PaginatedResponse } from '@shared/types/pagination.js';
 import bcrypt from 'bcryptjs';
 import type { RegisterAuthDTO } from '../@types/auth/auth.dto.js';
 import { UserRepository } from '../repositories/UserRepository.js';
 import type { CreateUserDTO, GetUsersPaginatedDTO, UpdateMeDTO, UpdateUserDTO } from '../@types/user/dto/user.input.dto.js';
 import type { UserResponseDTO } from '../@types/user/dto/user.output.dto.js';
-import { buildSqlFilters } from '../builders/sql/sqlFilterBuilder.js';
+import { buildSqlFilters } from '@shared/query/sqlFilterBuilder.js';
 import { userFilterConfig } from '../query/filters/userFilterConfig.js';
-import { AppError } from '../utils/AppError.js';
+import { AppError } from '@shared/errors/AppError.js';
 import { validateRegister, validateUpdateMe, validateUser } from '../validators/user.validator.js';
 import type { UserRoleRepository } from '../repositories/UserRoleRepository.js';
 import type { RoleService } from './role.Service.js';

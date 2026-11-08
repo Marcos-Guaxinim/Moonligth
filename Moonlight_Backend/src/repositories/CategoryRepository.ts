@@ -1,6 +1,6 @@
 import type { ResultSetHeader } from "mysql2";
-import pool from "../config/database.js";
-import type { FilterParams, QueryOptions } from "../@types/common/pagination.js";
+import pool from "@shared/config/database.js";
+import type { FilterParams, QueryOptions } from "@shared/types/pagination.js";
 import type { CreateCategoryDTO, UpdateCategoryDTO } from "../@types/category/dto/category.input.dto.js";
 import type { CategoryCountRows, CategoryRow } from "../@types/category/repository/category.row.js";
 import type { Category } from "../@types/category/repository/categrory.repository.js";
@@ -21,7 +21,7 @@ export class CategoryRepository{
 
     async findAll(): Promise<Category[]>{
         const [rows] = await pool.query<CategoryRow[]>(`
-            SELECT 
+            SELECT
             c.*
             FROM category c
             GROUP BY c.id_category
@@ -51,7 +51,7 @@ export class CategoryRepository{
         const newCategoryId = result.insertId;
         return newCategoryId;
     }
-    
+
     async update(query: UpdateCategoryDTO): Promise<boolean>{
         const [result] = await pool.query<ResultSetHeader>(
             `UPDATE category SET name = ?, description = ?, image = ? WHERE id_category = ?`,

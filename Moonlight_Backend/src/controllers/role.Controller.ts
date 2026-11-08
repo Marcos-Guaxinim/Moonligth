@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express';
 import type { RoleService } from '../services/role.Service.js';
-import { toInt } from '../utils/queryParser.js';
-import { AppError } from '../utils/AppError.js';
+import { toInt } from '@shared/query/queryParser.js';
+import { AppError } from '@shared/errors/AppError.js';
 
 export class RoleController {
 

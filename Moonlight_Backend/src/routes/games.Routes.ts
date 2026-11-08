@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { authMiddleware } from '../middlewares/auth.Middleware.js';
 import { gameController } from '../config/container.js';
-import { errorMiddleware } from '../middlewares/error.Middleware.js';
+import { errorMiddleware } from '@shared/middlewares/error.Middleware.js';
 import { roleMiddleware } from '../middlewares/role.Middleware.js';
 import { requireAdmin } from '../config/allowedRoles.js';
 

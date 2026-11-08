@@ -1,8 +1,8 @@
 import type { UserService } from '../services/user.Service.js';
 import type { NextFunction, Request, Response } from 'express';
 import type { CreateUserDTO, GetUsersPaginatedDTO, UpdateMeDTO, UpdateUserDTO } from '../@types/user/dto/user.input.dto.js';
-import { AppError } from '../utils/AppError.js';
-import { toInt } from '../utils/queryParser.js';
+import { AppError } from '@shared/errors/AppError.js';
+import { toInt } from '@shared/query/queryParser.js';
 import { parseUserQuery } from '../query/parsers/userParser.js';
 
 

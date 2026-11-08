@@ -1,5 +1,5 @@
 import { cpf } from "cpf-cnpj-validator";
-import { AppError } from "../utils/AppError.js";
+import { AppError } from "@shared/errors/AppError.js";
 import type { CreateUserDTO, UpdateMeDTO, UpdateUserDTO } from "../@types/user/dto/user.input.dto.js";
 import type { LoginAuthDTO, RegisterAuthDTO } from "../@types/auth/auth.dto.js";
 

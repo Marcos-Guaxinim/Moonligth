@@ -1,9 +1,9 @@
 import type { CreateGameDTO, GetGamesPaginatedDTO, UpdateGameDTO } from "../@types/game/dto/game.input.dto.js";
-import type { PaginatedResponse } from "../@types/common/pagination.js";
+import type { PaginatedResponse } from "@shared/types/pagination.js";
 import { GameRepository } from "../repositories/GameRepository.js";
 import type { GameResponseDTO } from "../@types/game/dto/game.output.dto.js";
 import { gameFilterConfig } from "../query/filters/gameFilterConfig.js";
-import { buildSqlFilters } from "../builders/sql/sqlFilterBuilder.js";
+import { buildSqlFilters } from "@shared/query/sqlFilterBuilder.js";
 import type { Pool } from "mysql2/promise";
 import { validateGame } from "../validators/game.validator.js";
 

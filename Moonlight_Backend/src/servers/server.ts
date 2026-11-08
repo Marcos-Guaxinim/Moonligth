@@ -10,7 +10,7 @@ import categoryRoutes from '../routes/category.Routes.js';
 import checkoutRoutes from '../routes/checkout.Routes.js';
 import orderRoutes from '../routes/order.Routes.js';
 import roleRoutes from '../routes/role.Routes.js';
-import { errorMiddleware } from '../middlewares/error.Middleware.js';
+import { errorMiddleware } from '@shared/middlewares/error.Middleware.js';
 
 dotenv.config();
 

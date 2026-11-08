@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import type { AuthResponseDTO, LoginAuthDTO } from "../@types/auth/auth.dto.js";
 import { UserRepository } from "../repositories/UserRepository.js";
-import { AppError } from "../utils/AppError.js";
+import { AppError } from "@shared/errors/AppError.js";
 import { validateLogin } from "../validators/user.validator.js";
 import type { UserRoleRepository } from "../repositories/UserRoleRepository.js";
 

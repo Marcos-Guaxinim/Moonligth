@@ -3,7 +3,7 @@ import type { CreatePurchasedItemsDTO } from "../../@types/purchasedItem/purchas
 import type { PurchasedItemsRepository } from "../../repositories/PurchasedItemsRepository.js";
 
 // Mock do pool ANTES de importar o service
-jest.unstable_mockModule("../../config/database.js", () => ({
+jest.unstable_mockModule("@shared/config/database.js", () => ({
   default: { query: jest.fn() },
 }));
 

@@ -21,7 +21,7 @@ import { OrderService } from "../services/order.Service.js";
 import { PurchasedItemsService } from "../services/purchasedItems.Service.js";
 import { RoleService } from "../services/role.Service.js";
 import { UserService } from "../services/user.Service.js";
-import pool from "./database.js";
+import pool from "@shared/config/database.js";
 
 export const userRepository     = new UserRepository();
 const gameRepository     = new GameRepository(pool);

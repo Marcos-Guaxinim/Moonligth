@@ -1,4 +1,4 @@
-import type { FilterConfig } from "../../builders/sql/filterConfigType.js";
+import type { FilterConfig } from "@shared/query/filterConfigType.js";
 
 type UserKeyFilters = "name" | "email" | "cpf" | "role";
 

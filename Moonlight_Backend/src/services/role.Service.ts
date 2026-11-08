@@ -1,6 +1,6 @@
 import type { PoolConnection } from "mysql2/promise";
 import type { RoleResponseDTO } from "../@types/role/role.dto.js";
-import pool from "../config/database.js";
+import pool from "@shared/config/database.js";
 import type { RoleRepository } from "../repositories/RoleRepository.js";
 import type { UserRepository } from "../repositories/UserRepository.js";
 import type { UserRoleRepository } from "../repositories/UserRoleRepository.js";

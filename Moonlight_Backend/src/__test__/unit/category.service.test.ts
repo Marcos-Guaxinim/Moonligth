@@ -4,7 +4,7 @@ import type { Category } from "../../@types/category/repository/categrory.reposi
 import type {
   FilterParams,
   QueryOptions,
-} from "../../@types/common/pagination.js";
+} from "@shared/types/pagination.js";
 import type {
   CreateCategoryDTO,
   UpdateCategoryDTO,

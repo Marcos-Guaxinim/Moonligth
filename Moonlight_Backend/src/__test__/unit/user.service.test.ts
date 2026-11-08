@@ -3,7 +3,7 @@ import type { UserRepository } from "../../repositories/UserRepository.js";
 import type {
   QueryOptions,
   FilterParams,
-} from "../../@types/common/pagination.js";
+} from "@shared/types/pagination.js";
 import type { UserWithoutPassword } from "../../@types/user/repository/user.repository.js";
 import type {
   CreateUserDTO,

@@ -1,9 +1,9 @@
 import type { Pool, PoolConnection, ResultSetHeader, RowDataPacket } from "mysql2/promise";
-import pool from "../config/database.js";
+import pool from "@shared/config/database.js";
 import type { UserCountRows, UserRoleVersionRow, UserRow, UserRowWithPassword } from "../@types/user/repository/user.row.js";
 import type { CreateUserDTO, UpdateMeDTO, UpdateUserDTO } from "../@types/user/dto/user.input.dto.js";
 import type { UserWithoutPassword, UserWithPassword } from "../@types/user/repository/user.repository.js";
-import type { FilterParams, QueryOptions } from "../@types/common/pagination.js";
+import type { FilterParams, QueryOptions } from "@shared/types/pagination.js";
 import type { RegisterAuthDTO } from "../@types/auth/auth.dto.js";
 
 export class UserRepository{

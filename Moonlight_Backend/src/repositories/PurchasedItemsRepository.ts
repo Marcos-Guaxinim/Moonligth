@@ -1,5 +1,5 @@
 import type { ResultSetHeader } from "mysql2";
-import pool from "../config/database.js";
+import pool from "@shared/config/database.js";
 import type { CreatePurchasedItemsDTO } from "../@types/purchasedItem/purchasedItem.dto.js";
 
 export class PurchasedItemsRepository{

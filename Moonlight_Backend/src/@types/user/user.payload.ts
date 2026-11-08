@@ -1,4 +1,4 @@
-import type { PaginatedQuery } from "../common/pagination.js";
+import type { PaginatedQuery } from "@shared/types/pagination.js";
 
 
 export interface UserQueryPayload {
