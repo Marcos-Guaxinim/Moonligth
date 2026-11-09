@@ -54,6 +54,7 @@ Regras que valem para todos os módulos:
 - Durante a migração a base fica **híbrida** (módulos migrados e camadas antigas coexistindo). É aceito porque o trabalho é feito por módulo, com os testes verdes a cada PR.
 - As regras de importação dependem de disciplina até serem **verificadas automaticamente** (ver trabalho em aberto).
 - Os módulos seguem compartilhando **um único banco**. As ligações entre tabelas de domínios diferentes (por exemplo, `purchased_items` com chave estrangeira para `game`) não poderão existir quando o Order Service tiver o `orders_db` próprio. Será preciso decidir como o pedido valida e guarda os dados do jogo (consulta via API ou cópia dos dados necessários).
+- Leitura por JOIN em repositories entre módulos que ficam no monólito é aceita, e escrita cruzada não.
 
 **Trabalho em aberto**
 - Regra de lint (`no-restricted-imports`) ou `dependency-cruiser` para barrar imports que furem o `index.ts`.

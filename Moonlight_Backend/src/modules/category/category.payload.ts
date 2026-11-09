@@ -9,11 +9,11 @@ export interface CategoryQueryPayload {
 
 /***
  * Payload de Query Paginada de Categoria
- * 
+ *
  * vai usar nas tabelas de admin
  */
 
-// export interface CategoryPaginatedQueryPayload extends PaginatedQuery{
-//   name?: string | undefined
-//   random?: boolean
-// }
+export interface CategoryPaginatedQueryPayload extends PaginatedQuery{
+  name?: string | undefined
+  random?: boolean
+}

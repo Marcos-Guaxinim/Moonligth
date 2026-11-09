@@ -1,9 +1,9 @@
 import type { ResultSetHeader } from "mysql2";
 import pool from "@shared/config/database.js";
 import type { FilterParams, QueryOptions } from "@shared/types/pagination.js";
-import type { CreateCategoryDTO, UpdateCategoryDTO } from "../@types/category/dto/category.input.dto.js";
-import type { CategoryCountRows, CategoryRow } from "../@types/category/repository/category.row.js";
-import type { Category } from "../@types/category/repository/categrory.repository.js";
+import type { CreateCategoryDTO, UpdateCategoryDTO } from "./dto/category.input.dto.js";
+import type { CategoryCountRows, CategoryRow } from "./category.row.js";
+import type { Category } from "./category.repository.types.js";
 
 export class CategoryRepository{
 

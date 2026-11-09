@@ -1,6 +1,6 @@
 import { expect, jest } from "@jest/globals";
-import type { CategoryRepository } from "../../repositories/CategoryRepository.js";
-import type { Category } from "../../@types/category/repository/categrory.repository.js";
+import type { CategoryRepository } from "./category.repository.js";
+import type { Category } from "./category.repository.types.js";
 import type {
   FilterParams,
   QueryOptions,
@@ -8,9 +8,9 @@ import type {
 import type {
   CreateCategoryDTO,
   UpdateCategoryDTO,
-} from "../../@types/category/dto/category.input.dto.js";
+} from "./dto/category.input.dto.js";
 
-const { CategoryService } = await import("../../services/category.Service.js");
+const { CategoryService } = await import("./category.service.js");
 
 const mockCategoryRepository = {
   findAllPaginated: jest.fn<(options: QueryOptions) => Promise<Category[]>>(),
