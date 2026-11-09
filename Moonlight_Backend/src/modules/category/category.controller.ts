@@ -1,17 +1,17 @@
 import type { NextFunction, Request, Response } from 'express';
-import type { CategoryService } from '../services/category.Service.js';
-import type { CreateCategoryDTO, UpdateCategoryDTO } from '../@types/category/dto/category.input.dto.js';
+import type { CategoryService } from './category.service.js';
+import type { CreateCategoryDTO, UpdateCategoryDTO } from './dto/category.input.dto.js';
 import { AppError } from '@shared/errors/AppError.js';
 import { toInt } from '@shared/query/queryParser.js';
-import { parseCategoriesQuery } from '../query/parsers/categoryParser.js';
+import { parseCategoriesQuery } from './category.parser.js';
 
 export class CategoryController{
 
-  constructor(private categoryService: CategoryService){} 
+  constructor(private categoryService: CategoryService){}
 
   getCategoriesPaginated = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      
+
       const categories = await this.categoryService.findAllPaginated(parseCategoriesQuery(req.query));
       if(!categories) throw new AppError("Categorias paginadas não encontradas", 404, "NOT_FOUND_CATEGORIES_PAG");
 
@@ -23,7 +23,7 @@ export class CategoryController{
 
   getCategories = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      
+
       const categories = await this.categoryService.findAll();
       if(!categories) throw new AppError("Categorias não encontradas", 404, "NOT_FOUND_CATEGORIES");
 
@@ -41,14 +41,14 @@ export class CategoryController{
 
       const category = await this.categoryService.findById(categoryId);
       if (!category) throw new AppError("Categoria não encontrada", 404, "NOT_FOUND_CATEGORY");
-      
+
       res.status(200).json(category);
     } catch (error) {
       next(error);
     }
   };
 
-  // Cria os jogos pelo comando do (admin) 
+  // Cria os jogos pelo comando do (admin)
   createCategory = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const dto = req.body as CreateCategoryDTO;
@@ -65,7 +65,7 @@ export class CategoryController{
   updateCategory = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const dto = req.body as UpdateCategoryDTO;
-      
+
       const id_category = toInt(req.params.id, 0);
       if (!id_category) throw new AppError("ID inválido", 400, "INVALID_ID");
 
@@ -78,7 +78,7 @@ export class CategoryController{
     }
   };
 
-  // Deleta o jogo pelos comandos de (admin) 
+  // Deleta o jogo pelos comandos de (admin)
   deleteCategory = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const id_category = toInt(req.params.id, 0);

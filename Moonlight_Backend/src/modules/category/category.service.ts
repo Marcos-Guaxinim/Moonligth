@@ -1,10 +1,10 @@
 import type { PaginatedResponse } from "@shared/types/pagination.js";
-import { CategoryRepository } from "../repositories/CategoryRepository.js";
-import type { CreateCategoryDTO, GetCategoriesPaginatedDTO, UpdateCategoryDTO } from "../@types/category/dto/category.input.dto.js";
-import type { CategoryResponseDTO } from "../@types/category/dto/category.output.dto.js";
+import { CategoryRepository } from "./category.repository.js";
+import type { CreateCategoryDTO, GetCategoriesPaginatedDTO, UpdateCategoryDTO } from "./dto/category.input.dto.js";
+import type { CategoryResponseDTO } from "./dto/category.output.dto.js";
 import { buildSqlFilters } from "@shared/query/sqlFilterBuilder.js";
-import { categoryFilterConfig } from "../query/filters/categoryFilterConfig.js";
-import { validateCategory } from "../validators/category.validator.js";
+import { categoryFilterConfig } from "./category.filter.js";
+import { validateCategory } from "./category.validator.js";
 
 export class CategoryService {
 
@@ -17,7 +17,7 @@ export class CategoryService {
             const order = query.random ? `RAND()` : 'c.id_category ASC'; // se vai randomizar ou ordenar de forma crescente
 
             const { where, params } = buildSqlFilters(query, categoryFilterConfig);
-            
+
             const data = await this.categoryRepository.findAllPaginated({filters: {dbParams: params, where, order}, pagination: {limit, offset}})
             const total = await this.categoryRepository.count({dbParams: params, where})
 
